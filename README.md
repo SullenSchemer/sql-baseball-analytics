@@ -8,7 +8,7 @@ The Lahman Baseball Database contains normalized relational data from 1871 to pr
 
 ## Approach
 
-Uses DuckDB (in-process SQL engine) with Parquet binary storage for efficient querying. The Lahman schema is normalized to 2NF/3NF: the People table (primary key: playerID) is independent; Batting, Fielding, Pitching, and Appearances tables all depend on (playerID, yearID) composites; Salaries links to Teams. Seven analytical queries are executed:
+Queries aggregate by playerID before joining People for display names to avoid collisions from players sharing names across eras. Seven analytical queries are executed:
 
 1. **Career Length** (DATE_DIFF): Players joining 2024 but departing mid-season
 2. **Games 2024**: Top contributors by total games in a single year
@@ -130,16 +130,6 @@ result <- dbGetQuery(con, sql)
 - **Data**: Lahman Baseball Database (CC-BY-SA 4.0)
 - **Visualization**: ggplot2
 
-## Notes on Normalization
-
-The Lahman schema reflects a well-normalized relational design:
-
-- **1NF (Atomic values)**: All columns contain single values (no repeating groups). playerID in People is unique; (playerID, yearID) in Batting is unique.
-- **2NF (No partial dependency on key)**: Non-key attributes depend on the entire key. In Batting, all fields (H, HR, AB, etc.) depend on the full composite (playerID, yearID).
-- **3NF (No transitive dependency)**: Non-key attributes depend only on the key, not on each other. Player name (in People) depends solely on playerID; birth state does not depend on name.
-
-This design enables efficient joins: filtering by playerID (People) and yearID (Batting) is straightforward. The schema avoids data anomalies (insertion, update, deletion) that plague denormalized designs.
-
 ## Limitations
 
 - **Salary data**: Sparse or missing prior to 1985 (pre-free agency era). Modern salary data complete.
@@ -150,5 +140,5 @@ This design enables efficient joins: filtering by playerID (People) and yearID (
 
 ## License
 
-Code: MIT (or your choice)  
+Code: MIT  
 Data: Lahman Baseball Database, CC-BY-SA 4.0
