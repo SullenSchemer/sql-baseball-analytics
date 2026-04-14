@@ -40,7 +40,7 @@ Top 3 qualified 2024 batting averages:
 
 ## Data Sources
 
-**Lahman Baseball Database v2024** – Historical statistics for all MLB players since 1871. Maintained by Sean Lahman ([seanlahman.com](https://www.seanlahman.com/baseball-archive/)), licensed under CC-BY-SA 4.0.
+**Lahman Baseball Database v2024** – Historical statistics for all MLB players since 1871. Maintained by Sean Lahman ([seanlahman.com](https://sabr.org/lahman-database/)), licensed under CC-BY-SA 4.0.
 
 - Tables: Appearances (game-by-game), Batting (season-level), Fielding, Pitching, Salaries, Teams, People
 - Format: Parquet (compressed binary columnar storage)
