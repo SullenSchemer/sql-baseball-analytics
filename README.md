@@ -52,6 +52,7 @@ Top 3 qualified 2024 batting averages:
 ```
 sql-baseball-analytics/
 ├── README.md
+├── LICENSE
 ├── .gitignore
 ├── data/
 │   ├── Appearances.parquet
